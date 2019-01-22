@@ -1,0 +1,9 @@
+代理模式
+	静态代理模式
+		聚合实现方式
+
+		通过Car3 实现 Moveable的接口
+			实现Moveable的Move方法
+			在Car3的构造器里传入Car对象
+			在Car3.Move方法里调用Car.Move方法
+			
