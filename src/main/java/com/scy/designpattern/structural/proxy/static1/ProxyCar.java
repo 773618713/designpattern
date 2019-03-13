@@ -1,6 +1,6 @@
 package com.scy.designpattern.structural.proxy.static1;
 
-public class Car2 extends Car{
+public class ProxyCar extends Car{
 	@Override
 	public void move() {
 		long startTime = System.currentTimeMillis();

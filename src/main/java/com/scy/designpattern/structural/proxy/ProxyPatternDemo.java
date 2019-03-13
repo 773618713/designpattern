@@ -1,5 +1,9 @@
 package com.scy.designpattern.structural.proxy;
-
+/**
+ * 使用代理模式实现单例
+ * @author sun
+ *
+ */
 public class ProxyPatternDemo {
 
 	public static void main(String[] args) {

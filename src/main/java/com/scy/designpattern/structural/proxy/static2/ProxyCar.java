@@ -1,10 +1,9 @@
 package com.scy.designpattern.structural.proxy.static2;
 
-public class Car3 implements Moveable {
+public class ProxyCar implements Moveable {
 	private Car car;
 
-	public Car3(Car car) {
-		super();
+	public ProxyCar(Car car) {
 		this.car = car;
 	}
 

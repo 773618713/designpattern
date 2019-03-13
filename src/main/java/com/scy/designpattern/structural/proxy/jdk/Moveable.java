@@ -1,4 +1,4 @@
-package com.scy.designpattern.structural.proxy.dynamic1;
+package com.scy.designpattern.structural.proxy.jdk;
 
 public interface Moveable {
 	void move();
