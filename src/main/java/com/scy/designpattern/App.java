@@ -1,15 +1,30 @@
 package com.scy.designpattern;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Hello world!
  *
  */
 public class App 
 {
-	//本地端代码
-    //服务器端代码
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
+    }
+    
+    public void addUser() {
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("a", 1);
+    	map.put("b", 1);
+    	map.put("c", 1);
+    }
+    
+    public void addUserTest() {
+    	Map<String, Object> map = new HashMap<>();
+    	map.put("a", 1);
+    	map.put("y", 2);
+    	map.put("z", 3);
     }
 }
