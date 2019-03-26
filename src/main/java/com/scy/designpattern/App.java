@@ -15,10 +15,6 @@ public class App
     }
     
     public void addUser() {
-    	Map<String, Object> map = new HashMap<>();
-    	map.put("a", 1);
-    	map.put("b", 1);
-    	map.put("c", 1);
     }
     
     public void addUserTest() {
