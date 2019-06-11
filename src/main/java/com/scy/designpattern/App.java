@@ -5,14 +5,13 @@ import java.util.Map;
 
 /**
  * Hello world!
- *
+ * 	这个类用来演示冲突解决
  */
 public class App 
 {
     public static void main( String[] args )
     {
         System.out.println( "Hello World!" );
-        //456
     }
     
     public void addUser() {
