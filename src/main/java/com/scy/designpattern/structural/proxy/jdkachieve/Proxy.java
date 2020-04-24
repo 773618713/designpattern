@@ -2,6 +2,8 @@ package com.scy.designpattern.structural.proxy.jdkachieve;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
 
 import javax.tools.JavaCompiler;
 import javax.tools.JavaCompiler.CompilationTask;
@@ -14,8 +16,30 @@ import com.sun.corba.se.impl.orbutil.closure.Constant;
 
 public class Proxy {
 
-	public static Object newProxyInstance() throws Exception {
-		String str = "package com.scy.designpattern.structural.proxy.jdkachieve;\r\n" + 
+	public static Object newProxyInstance(ClassLoader loader,
+										  Class<?>[] interfaces,
+										  InvocationHandler h)
+			throws Exception {
+
+		//获取路径
+		for (int i = 0; i < interfaces.length; i++) {
+			Class interfaceClass = interfaces[i];
+
+			System.out.println(interfaceClass.getName());
+			Method[] methods = interfaceClass.getMethods();
+			for (int j = 0; j < methods.length; j++) {
+				Method method = methods[j];
+				System.out.println("method.getName()");
+				System.out.println(method.getName());
+
+				//h.invoke(null,method,null);
+			}
+		}
+
+
+
+
+		String str = "package com.scy.designpattern.structural.proxy.jdkachieve;\r\n" +
 				"\r\n" + 
 				"public class $Proxy0 implements Moveable {\r\n" + 
 				"	private Car car;\r\n" + 
@@ -37,7 +61,7 @@ public class Proxy {
 		//产生动态代理类的java对象
 		String filename = System.getProperty("user.dir") +"/src/main/java/com/scy/designpattern/structural/proxy/jdkachieve/$Proxy0.java";
 		File file = new File(filename);
-		FileUtils.writeStringToFile(file, str);
+		FileUtils.writeStringToFile(file, str,"utf-8");
 		
 		//拿到编译器
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -53,9 +77,12 @@ public class Proxy {
 		fileMar.close();
 		
 		//load 到内存
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
+		/*ClassLoader cl = ClassLoader.getSystemClassLoader();
 		Class c = cl.loadClass("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
 		
+		Constructor ctr = c.getConstructor(Car.class);
+		return ctr.newInstance(new Car());*/
+		Class c = Class.forName("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
 		Constructor ctr = c.getConstructor(Car.class);
 		return ctr.newInstance(new Car());
 	}
