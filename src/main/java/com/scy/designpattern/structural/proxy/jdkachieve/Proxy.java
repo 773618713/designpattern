@@ -39,19 +39,17 @@ public class Proxy {
 		String interfaceStr = "";
 		String methodsStr = "";
 		for (int i = 0; i < interfaces.length; i++) {
+			//获取接口的全限定名
 			Class interfaceClass = interfaces[i];
 			interfaceStr += interfaceClass.getName();
 			if (i < interfaces.length-1){
 				interfaceStr+=",";
 			}
-			System.out.println(interfaceClass.getName());
 
-
+			//获取接口中分方法
 			Method[] methods = interfaceClass.getMethods();
 			for (int j = 0; j < methods.length; j++) {
 				Method method = methods[j];
-
-
 				String methodStr =
 				"	@Override\r\n" +
 				"	public void "+method.getName()+"()  throws Throwable{\r\n" +
@@ -59,39 +57,12 @@ public class Proxy {
 				"		h.invoke(this, method, method.getParameterTypes());\r\n" +
 				"	}\r\n";
 				methodsStr += methodStr;
-
-				System.out.println("method.getName()");
-				System.out.println(method.getName());
-				System.out.println(method.getParameterTypes().length);
-
 				//h.invoke(null,method,method.getParameterTypes());
-
 			}
 		}
 
-
-
-
+		//构建代理类的源码
 		String str = "package com.scy.designpattern.structural.proxy.jdkachieve;\r\n" +
-				"\r\n" + 
-				"public class $Proxy0 implements Moveable {\r\n" + 
-				"	private Car car;\r\n" + 
-				"\r\n" + 
-				"	public $Proxy0(Car car) {\r\n" + 
-				"		this.car = car;\r\n" + 
-				"	}\r\n" + 
-				"\r\n" + 
-				"	@Override\r\n" + 
-				"	public void move() {\r\n" + 
-				"		long startTime = System.currentTimeMillis();\r\n" + 
-				"		System.out.println(\"汽车开始行驶\");\r\n" + 
-				"		car.move();\r\n" + 
-				"		long endTime = System.currentTimeMillis();\r\n" + 
-				"		System.out.println(\"汽车行驶时间:\" + (endTime - startTime) + \"毫秒!\");\r\n" + 
-				"	}\r\n" + 
-				"}";
-
-		str = "package com.scy.designpattern.structural.proxy.jdkachieve;\r\n" +
 				"\r\n" +
 				"import java.lang.reflect.InvocationHandler;\r\n" +
 				"import java.lang.reflect.Method;\r\n" +
@@ -126,16 +97,18 @@ public class Proxy {
 		//进行编译
 		t.call();
 		fileMar.close();
-		
+
+		Thread.sleep(5000);
+
 		//load 到内存
-		/*ClassLoader cl = ClassLoader.getSystemClassLoader();
+		ClassLoader cl = ClassLoader.getSystemClassLoader();
 		Class c = cl.loadClass("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
-		
-		Constructor ctr = c.getConstructor(Car.class);
-		return ctr.newInstance(new Car());*/
-		Class c = Class.forName("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
 		Constructor ctr = c.getConstructor(InvocationHandler.class, interfaces.getClass());
-		return ctr.newInstance(h,interfaces);
+		return ctr.newInstance(h, interfaces);
+
+		/*Class c = Class.forName("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
+		Constructor ctr = c.getConstructor(InvocationHandler.class, interfaces.getClass());
+		return ctr.newInstance(h, interfaces);*/
 	}
 	
 

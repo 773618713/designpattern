@@ -59,16 +59,18 @@ public class simpleProxy {
 		//进行编译
 		t.call();
 		fileMar.close();
+
+		Thread.sleep(1000);
 		
 		//load 到内存
-		ClassLoader cl = ClassLoader.getSystemClassLoader();
+		/*ClassLoader cl = ClassLoader.getSystemClassLoader();
 		Class c = cl.loadClass("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
-		
+		Constructor ctr = c.getConstructor(Car.class);
+		return ctr.newInstance(new Car());*/
+
+		Class c = Class.forName("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
 		Constructor ctr = c.getConstructor(Car.class);
 		return ctr.newInstance(new Car());
-		/*Class c = Class.forName("com.scy.designpattern.structural.proxy.jdkachieve.$Proxy0");
-		Constructor ctr = c.getConstructor(InvocationHandler.class, interfaces.getClass());
-		return ctr.newInstance(h,interfaces);*/
 	}
 	
 
