@@ -98,7 +98,8 @@ public class Proxy {
 		t.call();
 		fileMar.close();
 
-		Thread.sleep(5000);
+		//编译应该是异步的，第一次执行会导致类不存在问题。可以多执行几次。
+		//Thread.sleep(5000);
 
 		//load 到内存
 		ClassLoader cl = ClassLoader.getSystemClassLoader();

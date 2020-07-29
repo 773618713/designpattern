@@ -1,7 +1,5 @@
 package com.scy.designpattern.structural.proxy.cglib;
 
-import java.util.Random;
-
 public class Car {
 
 	public void move(int time) {

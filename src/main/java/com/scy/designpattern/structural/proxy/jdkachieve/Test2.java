@@ -13,8 +13,8 @@ import java.lang.reflect.InvocationHandler;
 public class Test2 {
 	public static void main(String[] args) throws Throwable {
 		try {
-			simpleProxyTest();
-			//proxyTest();
+			//simpleProxyTest();
+			proxyTest();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
