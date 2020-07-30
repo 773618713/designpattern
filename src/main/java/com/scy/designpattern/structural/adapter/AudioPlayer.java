@@ -1,30 +1,34 @@
 package com.scy.designpattern.structural.adapter;
 
 /**
- * 
- * <p>Title: AudioPlayer</p>  
- * <p>Description: </p> 
- * 
+ * <p>Title: AudioPlayer 音频播放器</p>
+ * <p>Description: </p>
+ *
  * @author sun
- * @date 2019年1月27日
  * @version 1.0.1
+ * @date 2019年1月27日
  */
 public class AudioPlayer implements MediaPlayer {
 
-	AdvancedMediaPlayer advancedMediaPlayer;
-	
-	@Override
-	public void play(String type, String path) {
-		if ("mp3".equals(type)) {
-			// 原有的支持
-			System.out.println("播放MP3音乐");
-		} else if ("mp4".equals(type)) {
-			// 功能增强
-			if (advancedMediaPlayer == null) {
-				advancedMediaPlayer = new AdvancedMediaPlayer();
-				advancedMediaPlayer.play(type, path);
-			}
-		}
-	}
+    //媒体适配器
+    MediaAdapter mediaAdapter;
+
+    @Override
+    public void play(String audioType, String fileName) {
+
+        //播放 mp3 音乐文件的内置支持
+        if (audioType.equalsIgnoreCase("mp3")) {
+            System.out.println("Playing mp3 file. Name: " + fileName);
+        }
+        //mediaAdapter（媒体适配器） 提供了播放其他文件格式的支持
+        else if (audioType.equalsIgnoreCase("vlc")
+                || audioType.equalsIgnoreCase("mp4")) {
+            mediaAdapter = new MediaAdapter(audioType);
+            mediaAdapter.play(audioType, fileName);
+        } else {
+            System.out.println("Invalid media. " +
+                    audioType + " format not supported");
+        }
+    }
 
 }

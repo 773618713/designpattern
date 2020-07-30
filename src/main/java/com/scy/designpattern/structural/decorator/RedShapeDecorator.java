@@ -1,5 +1,8 @@
 package com.scy.designpattern.structural.decorator;
 
+/**
+ * 红色形状装饰器
+ */
 public class RedShapeDecorator extends ShapeDecorator{
 
 	public RedShapeDecorator(Shape decoratorShape) {
